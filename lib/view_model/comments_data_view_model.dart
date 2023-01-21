@@ -3,7 +3,6 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get/get.dart';
 import 'package:pingolearn_round/Api/Api/api_response.dart';
 import 'package:pingolearn_round/Api/Repo/comment_data_repo.dart';
-import 'package:pingolearn_round/firebase_option.dart';
 import 'package:pingolearn_round/model/response_model/comments_response_model.dart';
 
 class CommentsDataViewModel extends GetxController {
@@ -55,23 +54,6 @@ class CommentsDataViewModel extends GetxController {
     print('--_remoteConfig-String-${_remoteConfig.getString('newTest')}');
   }
 
-  onInit() async {
-    // FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.instance;
-    //     // var isUpdated = await firebaseRemoteConfig.fetchAndActivate();
-    //     print('--isHidden--${isHidden}');
-    // await firebaseRemoteConfig.setConfigSettings(
-    //   RemoteConfigSettings(
-    //     fetchTimeout: const Duration(seconds: 10),
-    //     minimumFetchInterval: Duration.zero,
-    //   ),
-    // );
-    // print(
-    //     '--isHidden--222==${firebaseRemoteConfig.getBool('emailVerification')}');
-    // isHidden = firebaseRemoteConfig.getBool('emailVerification');
-    // print('--isHidden--${isHidden}');
-    // update();
-    super.onInit();
-  }
 
   /// register...
   Future<void> commentsDataViewModel() async {
