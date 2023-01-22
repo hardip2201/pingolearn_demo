@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get/get.dart';
 import 'package:pingolearn_round/Api/Api/api_response.dart';
@@ -8,52 +7,21 @@ import 'package:pingolearn_round/model/response_model/comments_response_model.da
 class CommentsDataViewModel extends GetxController {
   ApiResponse apiResponse = ApiResponse.initial('Initial');
 
-  bool isHidden = true;
+  bool isHidden = false;
 
   final FirebaseRemoteConfig _remoteConfig = FirebaseRemoteConfig.instance;
   Future<void> initConfig() async {
-    // // final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
-    // await _remoteConfig.setConfigSettings(RemoteConfigSettings(
-    //   fetchTimeout: const Duration(seconds: 10),
-    //   minimumFetchInterval: const Duration(hours: 1),
-    // ));
-    // // await _remoteConfig.setDefaults(<String, dynamic>{
-    // //   'welcome': 'default welcome',
-    // //   'hello': 'default hello',
-    // // });
-    // // RemoteConfigValue(null, ValueSource.valueStatic);
-    //
-    // _fetchConfig();
-    FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.instance;
-    // var isUpdated = await firebaseRemoteConfig.fetchAndActivate();
-
-    await firebaseRemoteConfig.setConfigSettings(
+    await _remoteConfig.fetchAndActivate();
+    await _remoteConfig.setConfigSettings(
       RemoteConfigSettings(
         fetchTimeout: const Duration(minutes: 5),
         minimumFetchInterval: const Duration(seconds: 30),
       ),
     );
 
-    var emailVerifcation = firebaseRemoteConfig.getBool('emailVerification');
-    var newtest = firebaseRemoteConfig.getString('newTest');
-    print('--emailVerifcationemailVerifcation--${emailVerifcation}');
-    print('--newtestnewtest-BOol-${newtest}');
+    isHidden = _remoteConfig.getBool('emailVerification');
+    update();
   }
-
-  // Fetching, caching, and activating remote config
-  void _fetchConfig() async {
-    _remoteConfig.addListener(() {
-      print(
-          'LISTEN--_remoteConfig--${_remoteConfig.getBool('emailVerification')}');
-      print('--_remoteConfig-String-${_remoteConfig.getString('newTest')}');
-    });
-
-    // await _remoteConfig.fetchAndActivate();
-    print('--_remoteConfig--${_remoteConfig.getAll()}');
-    print('--_remoteConfig-BOol-${_remoteConfig.getBool('emailVerification')}');
-    print('--_remoteConfig-String-${_remoteConfig.getString('newTest')}');
-  }
-
 
   /// register...
   Future<void> commentsDataViewModel() async {
